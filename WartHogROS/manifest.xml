@@ -1,0 +1,17 @@
+<package>
+  <description brief="WartHogROS">
+
+     WartHogROS
+
+  </description>
+  <author>Jackie Jin40231072927233107292723</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/WartHogROS</url>
+  <depend package="rospy"/>
+  <depend package="std_msgs"/>
+  <depend package="roscpp"/>
+
+</package>
+
+
