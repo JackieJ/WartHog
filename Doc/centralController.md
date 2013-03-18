@@ -13,6 +13,7 @@
 P.S.read the comments in the code, you don't need to understand the syntax. loose implementation, subject to change by tests.      
 The controller we are implementing works as a simple [Mealy Machine](http://en.wikipedia.org/wiki/Mealy_machine)
 #####Walk
+Walk state is activated when the transition condition MODE == WALK
 * Relevant Input: 
   * Target Coord
   * Current GPS Fix(UTM[x,y]). If you don't know about UTM, here is the [wiki page](http://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system)
