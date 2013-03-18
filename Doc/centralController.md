@@ -9,7 +9,7 @@
 * Kill Swtich: True/False;
 * Diagnostic Message Aggregator: battery level, connectivity
 
-###States (Priorities: Kill > Obstacle > Target > Detector > Walk)
+###States (Priorities: Terminate > Obstacle > Target > Detector > Walk)
 P.S.read the comments in the code, you don't need to understand the syntax. loose implementation, subject to change by tests.      
 The controller we are implementing works as a simple [Mealy Machine](http://en.wikipedia.org/wiki/Mealy_machine)
 #####Walk
@@ -90,9 +90,10 @@ The controller we are implementing works as a simple [Mealy Machine](http://en.w
 ```         
 
 #####Detector
-  Detector mode is activated when the transition condition MODE == DETECTOR
+Detector mode is activated when the transition condition MODE == DETECTOR
 #####Obstacle
-
+Obstacle mode is activated when the transition condition MODE == OBSTACLE
 #####Target
-
-#####Kill
+Target mode is activated when the transition condition MODE == TARGET
+#####Terminate
+Target mode is activated when the transition condition MODE == TERMINATE
