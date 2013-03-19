@@ -98,8 +98,3 @@ Obstacle mode is activated when the transition condition MODE == OBSTACLE
 Target mode is activated when the transition condition MODE == TARGET
 #####Terminate
 Target mode is activated when the transition condition MODE == TERMINATE
-
-#####Comment:
-Jackie, can you add descriptions under each mode explaining what each mode does in a North Campus-friendly way? I shouldn't have to navigate through code to figure out what you are trying to do for each mode.
-
--Ed
