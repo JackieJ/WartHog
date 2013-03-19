@@ -2,7 +2,7 @@
 ###Inputs      
 * Target Coord from the waypoint Queue [x,y]+ (User Defined and Load before Execution);      
 * GPS Fix: LL to UTM ([Lon, Lat] => [x,y]);
-* Camera: 
+* Camera: RegionOfInterest [x,y,width,height]
 * Bumper: True/False;
 * Previous Motor Linear/Angular Speed Output: speed.linear, speed.angular
 * Gyro: Headings (Here assumes the x-y pin's full range output is up to 360 degree);
