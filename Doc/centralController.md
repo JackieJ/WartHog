@@ -1,7 +1,13 @@
 ##FSM/Controller   
+###Gist
+The finites state machine controls and decides the next movement of the robot based on inputs. The input data       
+should be already formatted in the expected way and the machine should do less data conversion as much as possible     
+(i.e. position data like [lon, lat] in LL cannot be accepted since the expected format is [x,y] in UTM). All       
+conversion should be taken care of by external nodes except conversion in kinematics for mathematical calculation    
+(divide and conquer). The output of the machine decides the next move of the bot and is sent to the motor node.
 ###Inputs      
 * Target Coord from the waypoint Queue [x,y]+ (User Defined and Load before Execution);      
-* GPS Fix: LL to UTM ([Lon, Lat] => [x,y]);
+* GPS Fix: UTM ([x,y]);
 * Camera: RegionOfInterest [x,y,width,height]
 * Bumper: True/False;
 * Previous Motor Linear/Angular Speed Output: speed.linear, speed.angular
@@ -16,7 +22,8 @@ The controller we are implementing works as a simple [Mealy Machine](http://en.w
 Walk state is activated when the transition condition MODE == WALK
 * Relevant Input: 
   * Target Coord
-  * Current GPS Fix(UTM[x,y]). If you don't know about UTM, here is the [wiki page](http://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system)
+  * Current GPS Fix(UTM[x,y]). If you don't know about UTM, here is the 
+    [wiki page](http://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system)
   * Current Motor Speed(Linear, Angular)
   * Headings (0-359, Gyro code needs to -360 to angles > 359 and +360 to angles < 0 until is's within the range      
     between 0 to 360
@@ -57,14 +64,16 @@ Walk state is activated when the transition condition MODE == WALK
   
   angleErr = targetAngle - heading # the heading is obtained from the gyro
   
-  #transition to DETECTOR mode if the absolute distance from the target is shorter than 3 meters and the absolute
+  #transition to DETECTOR mode if the absolute distance from the 
+  #target is shorter than 3 meters and the absolute
   #angle err is less than 10 degree (need calibaeration)
   if distanceFromTheTarget < 3 and math.fabs(angleErr) <= 10:
     MODE = DETECTOR
     break
   
   #Err correction based on the heading and distance errs
-  #Objective: Try to keep the err within 10 degrees (within the same relative quadrant) (need caliberation)
+  #Objective: Try to keep the err within 10 degrees 
+  #(within the same relative quadrant) (need caliberation)
     
   #calculate the speed based on angleErr
   linear = 0
@@ -92,6 +101,14 @@ Walk state is activated when the transition condition MODE == WALK
 
 #####Detector
 Detector mode is activated when the transition condition MODE == DETECTOR
+* Relavent Input: Region of Interest (x,y,height,width)
+* Output: none (Detector transit to either the obstacle mode or the target mode)
+* Loose implementation of the detector:
+
+```python
+ 
+```
+
 #####Obstacle
 Obstacle mode is activated when the transition condition MODE == OBSTACLE
 #####Target
