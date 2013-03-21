@@ -5,6 +5,9 @@ should be already formatted in the expected way and the machine should do less d
 (i.e. position data like [lon, lat] in LL cannot be accepted since the expected format is [x,y] in UTM). All       
 conversion should be taken care of by external nodes except conversion in kinematics for mathematical calculation    
 (divide and conquer). The output of the machine decides the next move of the bot and is sent to the motor node.
+Here is the FSM graph if you don't want to read through the code. Transitions happen when the conditions are met     
+and data IO is processed within each state.
+![FSM](https://raw.github.com/CloudClown/WartHog/jackie/Doc/FSM.png)
 ###Inputs      
 * Target Coord from the waypoint Queue [x,y]+ (User Defined and Load before Execution);      
 * GPS Fix: UTM ([x,y]);
