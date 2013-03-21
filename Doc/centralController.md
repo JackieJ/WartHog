@@ -8,7 +8,7 @@ conversion should be taken care of by external nodes except conversion in kinema
 ###Inputs      
 * Target Coord from the waypoint Queue [x,y]+ (User Defined and Load before Execution);      
 * GPS Fix: UTM ([x,y]);
-* Camera: RegionOfInterest [x,y,width,height]
+* Camera: RegionOfInterest [x,y,width,height,flag]
 * Bumper: True/False;
 * Previous Motor Linear/Angular Speed Output: speed.linear, speed.angular
 * Gyro: Headings (Here assumes the x-y pin's full range output is up to 360 degree);
@@ -42,7 +42,8 @@ Walk state is activated when the transition condition MODE == WALK
   #+linear:forward, -linear:backward, +angular:yaw clockwise, -angular:yaw counterclockwise
   
   #start if the transition hits the WALK state
-  while MODE == WALK:
+  if MODE == WALK:
+  
   ############
   #Kinematics#
   ############
@@ -64,7 +65,7 @@ Walk state is activated when the transition condition MODE == WALK
   
   angleErr = targetAngle - heading # the heading is obtained from the gyro
   
-  #transition to DETECTOR mode if the absolute distance from the 
+  #transition to TARGET mode if the absolute distance from the 
   #target is shorter than 3 meters and the absolute
   #angle err is less than 10 degree (need calibaeration)
   if distanceFromTheTarget < 3 and math.fabs(angleErr) <= 10:
@@ -101,17 +102,108 @@ Walk state is activated when the transition condition MODE == WALK
 
 #####Detector
 Detector mode is activated when the transition condition MODE == DETECTOR
-* Relavent Input: Region of Interest (x,y,height,width)
+* Relavent Input: 
+ * Region of Interest: ROI(x,y,height,width, flag)
+ * Current GPS Fix [x,y] in UTM
 * Output: none (Detector transit to either the obstacle mode or the target mode)
 * Loose implementation of the detector:
 
 ```python
- 
+ #monitor the ROI from the camera all the time
+ while (1):
+  flag = ROI.flag
+  #distance from target is calculated using the GPS fix and target coordinate
+  if (MODE != TARGET and distanceFromTarget < 3):
+   MODE = TARGET
+  elif (flag == Obstacle && MODE != OBSTACLE):
+   MODE = OBSTACLE
+  elif (MODE != WALK)
+   MODE = WALK
 ```
 
 #####Obstacle
 Obstacle mode is activated when the transition condition MODE == OBSTACLE
+* Relevant Input:
+ * Region of Interest: ROI(x,y,height,width,flag)
+ * Current GPS Fix [x,y] in UTM
+ * Loose implementation of the obstacle state
+* Output: nextSpeed
+
+```python
+ #Objective: Make the robot move so that it's away from the ROI where the obstacle is centered
+ #so far we hard code it to back up, turn and continue (will make specific implementation
+ #based on tests)
+ if (ROI.flag == Obstacle):
+   #back up for 2 seconds
+   while (true):
+    nextSpeed.linear = -LINEARMAXSPEED
+    nextSpeed.linear = -ANGULARMAXSPEED
+    publish(nextSpeed)
+    sleep(2)
+    break
+ else:
+  MODE = DETECTOR
+```
+
 #####Target
 Target mode is activated when the transition condition MODE == TARGET
+* Relevant Input:
+ * Region of Interest: ROI(x,y,height,width,flag)
+ * Current GPS Fix [x,y] in UTM
+ * Loose implementation of the obstacle state
+* Output: nextSpeed
+* Loose Implementation
+
+```python
+ #Objective: Put the target within the threshhold and go forward until it touches the cone
+ 
+ #if bumper is hit and the distance is smaller than 1(needs caliberation, stops back up and go to next target)
+ #back to walk mode
+ if (bumper and distanceFromTarget < 1):
+  currentTargetCoord = targetCoordQueue.shift()
+  #back up and turn
+  nextSpeed.linear = -LINEARMAXSPEED
+  nextSpeed.angular = -ANGULARMAXSPEED
+  sleep(2)
+  MODE = WALK
+ 
+ #calculate the center of the ROI, based on the image frame size from the camera
+ COR_X = ROI.x_offset + ROI.width / 2 - self.image_width / 2
+ #move bot accordingly based the difference between COR and the threshhold
+ #the target pos exceeds threshhold in x-direction, that's the only direction we care about
+ if abs(COR_X) > XTHRESHHOLD
+   if COR_X > 0
+    nextSpeed.angular = 1
+   else 
+    nextSpeed.angular = -1
+  nextSpeed.linear = 0
+ else 
+  nextSpeed.linear = 1
+  nextSpeed.angular = 0
+  
+ publish(nextSpeed)
+```
+
 #####Terminate
 Target mode is activated when the transition condition MODE == TERMINATE
+* Relevant Input:
+ * Bumper (True/False)
+ * Kill Swtich (True/False)
+ * Diagnostic Aggregator (Battery Level)
+* Loose implementation
+
+```python
+ #Objective: Stop the bot or act accordingly
+ if killSwitch or batteryLevel < THRESHHOLD:
+  nextSpeed.linear = 0
+  nextSpeed.linear = 0
+  publish(nextSpeed)
+ #if the bump is hit way before reaching the target. Hardcode it so that it back up
+ #and turn
+ if (Bumper and distanceFromTarget > 3):
+  nextSpeed.linear = -LINEARMAXSPEED
+  nextSpeed.angular = -ANGULARMAXSPeED
+  publish(nextSpeed)
+  sleep(2)
+ 
+```
