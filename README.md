@@ -1,6 +1,8 @@
 ##TODO         
  * Design flows       
  * Milestones
+ * determine what the zero point for the gyroscope should be (currently is 180 degrees)
+ * double check gyro output matches the expected gyro input for the Walk code (central Controller)
 
 ##Wiring of IMU (5 Degrees of Freedom) to Arduino
 IMU Board <--> Arduino  
@@ -20,7 +22,56 @@ GND <--> GND
 and the x-axis and outputs them as analog signals.
 * When stationary, the gyroscope measurements should be zero.
 
+######Input
+* Analog readings (0 to 1023 values)
+
+```c++
+ double reading = analogRead(pin);
+```
+* gyro reading when the gyro is at "zero position" (horizontal/flat on the table)
+
+```c++
+ //find the "zero position" values experimentally by printing out the "zero position" values
+ Serial.print(analogRead(xgyroPin));
+ Serial.print(analogRead(ygyroPin));
+```
+```c++
+const int gyroZeroX = 484;
+const int gyroZeroY = 472;  
+```
+
+######Output
+* Degrees/second
+
+``` c++
+ double getGyroRate(int pin)
+{
+ delay(1); //delay between readings for stability
+ double reading = analogRead(pin); 
  
+ //gyroY and gyroX have different "zero positions"
+ if(pin == xgyroPin)
+   return double((reading - gyroZeroX) / gyroScale); //in degrees/sec
+ else
+   return double((reading - gyroZeroY) / gyroScale); 
+}
+```
+
+* Degrees/second to degrees
+  * need to take the time between now and the last time the loop was run
+
+```c++
+  //time passed since last loop in seconds  
+  //micros() gives you the time the program has been running in microseconds
+  timeDiff = (micros() - lastLoopTime)/1000000;   
+    
+  double gyroXangle = getGyroRate(xgyroPin)*timeDiff;
+  double gyroYangle = getGyroRate(ygyroPin)*timeDiff;
+  
+  //update the lastLoopTime
+  lastLoopTime = micros();
+```
+
 ##Accelerometer
 ###Overview
 The accelerometer measures Earth's gravitational acceleration (g) in 3-D. 
