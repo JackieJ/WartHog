@@ -20,6 +20,7 @@ double lastLoopTime, timeDiff;
   //get a shifted sensor reading.
 const float zero_G_y = 512.0; 
 const float zero_G_x = 505.0;
+const float zero_G_z = 604.0;
 
   //scale is the number of units we expect the sensor reading to
   //change when the acceleration along an axis changes by 1G.
@@ -42,10 +43,7 @@ const int gyroZeroY = 472;
 
 int sampleDelay = 200;   //number of milliseconds between readings
 
-double gyroXangle = 180; // Angle calculate using the gyro
-double gyroYangle = 180;
-
-double compAngleX = 180; // Calculate the angle using a Kalman filter
+double compAngleX = 180; // Calculate the angle using a Comlimentary Filter
 double compAngleY = 180;
 
 void setup()
@@ -73,8 +71,10 @@ float getAccInG(int pin)
  int reading = analogRead(pin);
  if(pin == xaccPin)
    return (reading - zero_G_x) / accScale;
- else
+ else if(pin == yaccPin)
    return (reading - zero_G_y) / accScale;
+ else
+   return (reading - zero_G_z) / accScale;
 }
 
 double getGyroRate(int pin)
@@ -94,6 +94,10 @@ void loop()
   accX = getAccInG(xaccPin);
   accY = getAccInG(yaccPin);
   accZ = getAccInG(zaccPin);
+
+ Serial.print(analogRead(xaccPin)); Serial.print("\t");
+ Serial.print(analogRead(yaccPin)); Serial.print("\t");  
+ Serial.print(analogRead(zaccPin)); Serial.print("\t");
   
   //flat on the table: accXangle and accYangle are 180 degrees
   //output should be 0 to 360 degrees
@@ -101,11 +105,9 @@ void loop()
   double accXangle = ((atan2(accX, accZ)+PI)*RAD_TO_DEG);
   double accYangle = (atan2(accY, accZ)+PI)*RAD_TO_DEG;
 
-  Serial.print(accXangle);
-  Serial.print("\t");
+  Serial.print(accXangle); Serial.print("\t");
   
-  Serial.print(accYangle);
-  Serial.print("\t");
+  Serial.print(accYangle); Serial.print("\t");
 
   //=================
   //gyro code
@@ -113,8 +115,8 @@ void loop()
   //time passed since last loop in seconds  
   timeDiff = (micros() - lastLoopTime)/1000000;   
     
-  gyroXangle = getGyroRate(xgyroPin)*timeDiff;
-  gyroYangle = getGyroRate(ygyroPin)*timeDiff;
+  double gyroXangle = getGyroRate(xgyroPin)*timeDiff;
+  double gyroYangle = getGyroRate(ygyroPin)*timeDiff;
   
   // Calculate the angle using a Complimentary filter
   compAngleX = 0.93*(compAngleX+gyroXangle)+(0.07*accXangle); 
