@@ -74,8 +74,52 @@ const int gyroZeroY = 472;
 
 ##Accelerometer
 ###Overview
-The accelerometer measures Earth's gravitational acceleration (g) in 3-D. 
-Measurements  are initially as analog signals.
+* The accelerometer measures Earth's gravitational acceleration (g) in 3-D. 
+* Measurements from the accelerometer can be used to determine the tilt of the robot.
+
+#####Input
+* Analog readings (0 to 1023)
+
+```c++
+ int reading = analogRead(pin);
+```
+* accelerometer reading when the accleromter is at "zero position" (horizontal/flat on the table)
+
+```c++
+ //find the "zero position" values experimentally by printing out the "zero position" values
+ Serial.print(analogRead(xaccPin));
+ Serial.print(analogRead(yaccPin));
+ Serial.print(analogRead(zaccPin));
+```
+```c++
+const float zero_G_y = 512.0; 
+const float zero_G_x = 505.0;
+const float zero_G_z = 604.
+```
+
+######Output
+* acceleration in g's
+
+```c++
+float getAccInG(int pin)
+{
+ delay(1);  //delay between readings for stability
+ int reading = analogRead(pin);
+ 
+ //x and y axis have different "zero positions" (no accleration)
+ if(pin == xaccPin)
+   return (reading - zero_G_x) / accScale;
+ else
+   return (reading - zero_G_y) / accScale;
+}
+```
+
+* accleration in g's to angles
+
+```c++
+  double accXangle = ((atan2(accX, accZ)+PI)*RAD_TO_DEG);
+  double accYangle = (atan2(accY, accZ)+PI)*RAD_TO_DEG;
+```
 
 ##Complimentary Filter
 ###Overview
