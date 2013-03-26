@@ -3,6 +3,7 @@
  * Milestones
  * determine what the zero point for the gyroscope should be (currently is 180 degrees)
  * double check gyro output matches the expected gyro input for the Walk code (central Controller)
+ * look for a more accurate way to determine the "zero position"
 
 ##Wiring of IMU (5 Degrees of Freedom) to Arduino
 IMU Board <--> Arduino  
