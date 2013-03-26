@@ -18,7 +18,7 @@ double lastLoopTime, timeDiff;
   //zero_G is the reading we expect from the sensor when it detects
   //no acceleration.  Subtract this value from the sensor reading to
   //get a shifted sensor reading.
-const float zero_G = 512.0; 
+const float zero_G_y = 512.0; 
 const float zero_G_x = 505.0;
 
   //scale is the number of units we expect the sensor reading to
@@ -74,7 +74,7 @@ float getAccInG(int pin)
  if(pin == xaccPin)
    return (reading - zero_G_x) / accScale;
  else
-   return (reading - zero_G) / accScale;
+   return (reading - zero_G_y) / accScale;
 }
 
 double getGyroRate(int pin)
@@ -95,19 +95,13 @@ void loop()
   accY = getAccInG(yaccPin);
   accZ = getAccInG(zaccPin);
   
-//The sensors values vs position should read as follow:
-//Horizontal  ( 0° =  0 Quid )   ACC_X: 0    ACC_Z: XX   GYR_X: 0
-//Left side   (-90° = -256 Quid) ACC_X: XX   ACC_Z: 0    GYR_X: 0
-//Right side (+90° = +256 Quid)  ACC_X:-XX   ACC_Z: 0    GYR_X: 0
-//Reversed  (180° = +512 Quid)   ACC_X: 0    ACC_Z:-XX   GYR_X: 0
-
-//flat on the table: accXangle and accYangle are 180 degrees
- 
-  //output is 0 to 360 degrees
+  //flat on the table: accXangle and accYangle are 180 degrees
+  //output should be 0 to 360 degrees
+  //need to think about what angle should be starting position
   double accXangle = ((atan2(accX, accZ)+PI)*RAD_TO_DEG);
   double accYangle = (atan2(accY, accZ)+PI)*RAD_TO_DEG;
 
-    Serial.print(accXangle);
+  Serial.print(accXangle);
   Serial.print("\t");
   
   Serial.print(accYangle);
@@ -116,21 +110,20 @@ void loop()
   //=================
   //gyro code
   
-  //time passed since last loop in seconds
-  
+  //time passed since last loop in seconds  
   timeDiff = (micros() - lastLoopTime)/1000000;   
     
   gyroXangle = getGyroRate(xgyroPin)*timeDiff;
   gyroYangle = getGyroRate(ygyroPin)*timeDiff;
   
-  compAngleX = 0.93*(compAngleX+gyroXangle)+(0.07*accXangle); // Calculate the angle using a Complimentary filter
+  // Calculate the angle using a Complimentary filter
+  compAngleX = 0.93*(compAngleX+gyroXangle)+(0.07*accXangle); 
   compAngleY = 0.93*(compAngleY+gyroYangle)+(0.07*accYangle); 
   
   Serial.print(compAngleX);Serial.print("\t");
 //  Serial.print(compAngleY); Serial.print("\t");
   
-  Serial.print(gyroXangle);
-  Serial.print("\t");
+  Serial.print(gyroXangle); Serial.print("\t");
   
 //  Serial.print(gyroYangle);  Serial.print("\t");
   Serial.print("\n");
@@ -139,5 +132,5 @@ void loop()
 
   // delay before next reading:
   delay(sampleDelay);
- 
+
 }
