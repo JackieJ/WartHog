@@ -84,7 +84,6 @@ float getAccInG(int pin)
    reading+=analogRead(pin);
  }
  reading = reading/count;
-   //Serial.print(reading);Serial.print("\t");
  
  if(pin == xaccPin)
    return (reading - zero_G_x) / accScale;
@@ -99,7 +98,7 @@ int getGyroRate(int pin)
  delay(1);
   int count = 5;
 double reading = analogRead(pin);
-//  Serial.print(reading);Serial.print("\t");
+
  for(int i=0; i<count-1; i++)
  {
    reading+=analogRead(pin);
@@ -135,23 +134,19 @@ void loop()
   double gyroYangle = getGyroRate(ygyroPin)*timeDiff;
   
   // Calculate the angle using a Complimentary filter
-//  Serial.print(accXangle);Serial.print("\t");
-//    Serial.print(accYangle);Serial.print("\t");
 if(gyroXangle != 0)
   compAngleX = 0.93*(compAngleX+gyroXangle)+(0.07*accXangle); 
 if(gyroYangle != 0)
   compAngleY = 0.93*(compAngleY+gyroYangle)+(0.07*accYangle); 
-
-//    Serial.print(accZ);Serial.print("\t");
-//      Serial.print(getGyroRate(xgyroPin)*timeDiff);Serial.print("\t");
-//      Serial.print(getGyroRate(ygyroPin)*timeDiff);Serial.print("\t");
- // Serial.print(accXangle);Serial.print("\t");  
- //   Serial.print(accYangle);Serial.print("\t"); 
+/*
+  Serial.print("compAngleX: ");
   Serial.print(compAngleX);Serial.print("\t");
+    Serial.print("compAngleY: ");
   Serial.print(compAngleY); Serial.print("\t");
-  
+  */
+    Serial.print("gyroXangle: ");
   Serial.print(gyroXangle); Serial.print("\t");
-  
+  Serial.print("gyroYangle: ");
   Serial.print(gyroYangle);  Serial.print("\t");
   Serial.print("\n");
 
