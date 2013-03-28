@@ -84,7 +84,7 @@ const int gyroZeroY = 472;
 ```c++
  int reading = analogRead(pin);
 ```
-* accelerometer reading when the accleromter is at "zero position" (horizontal/flat on the table)
+* accelerometer reading when the acceleromter is at "zero position" (horizontal/flat on the table)
 
 ```c++
  //find the "zero position" values experimentally by printing out the "zero position" values
@@ -97,6 +97,11 @@ const float zero_G_y = 512.0;
 const float zero_G_x = 505.0;
 const float zero_G_z = 604.
 ```
+* scale factor for the accelerometer
+  * needed to convert from analog readings to g's
+
+accScale = sensitivity_of_acc (found in spec sheet)/ (1023 values * 3.3V)  
+accScale = 330 mV/g * (1023 values * 3.3V) = 102.3 values/g
 
 ######Output
 * acceleration in g's
