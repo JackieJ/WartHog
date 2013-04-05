@@ -46,6 +46,9 @@ int sampleDelay = 200;   //number of milliseconds between readings
 double compAngleX = 0; // Calculate the angle using a Comlimentary Filter
 double compAngleY = 0;
 
+double curX = 0;
+double curY = 0;
+
 void setup()
 {
   nh.initNode();
@@ -124,6 +127,7 @@ void loop()
   double accXangle = ((atan2(accX, accZ)+PI)*RAD_TO_DEG);
   double accYangle = (atan2(accY, accZ)+PI)*RAD_TO_DEG;
   
+  
   //=================
   //gyro code
   
@@ -138,16 +142,26 @@ if(gyroXangle != 0)
   compAngleX = 0.93*(compAngleX+gyroXangle)+(0.07*accXangle); 
 if(gyroYangle != 0)
   compAngleY = 0.93*(compAngleY+gyroYangle)+(0.07*accYangle); 
-/*
+
   Serial.print("compAngleX: ");
   Serial.print(compAngleX);Serial.print("\t");
     Serial.print("compAngleY: ");
   Serial.print(compAngleY); Serial.print("\t");
-  */
+/*
     Serial.print("gyroXangle: ");
   Serial.print(gyroXangle); Serial.print("\t");
   Serial.print("gyroYangle: ");
   Serial.print(gyroYangle);  Serial.print("\t");
+ */
+ /*
+  curX += compAngleX;
+  curY += compAngleY;
+  Serial.print("Current x: ");
+  Serial.print(curX); Serial.print("\t");
+
+  Serial.print("Current y: ");
+  Serial.print(curY); Serial.print("\t");
+*/
   Serial.print("\n");
 
   lastLoopTime = micros();
