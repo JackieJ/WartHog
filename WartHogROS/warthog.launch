@@ -1,4 +1,0 @@
-<launch>
-        <node name="fsm" pkg="WartHogROS" type="fsm.py"/>
-        <node name="gps" pkg="WartHogROS" type="gps.py"/>
-</launch>
