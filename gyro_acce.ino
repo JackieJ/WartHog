@@ -46,7 +46,7 @@ int sampleDelay = 200;   //number of milliseconds between readings
 double compAngleX = 0; // Calculate the angle using a Comlimentary Filter
 double compAngleY = 0;
 
-double curX = 0;
+double curX = 180;
 double curY = 0;
 
 void setup()
@@ -91,14 +91,13 @@ float getAccInG(int pin)
  if(pin == xaccPin)
    return (reading - zero_G_x) / accScale;
  else if(pin == yaccPin)
-   return int((reading - zero_G_y) / accScale);
+   return (reading - zero_G_y) / accScale;
  else
-   return int((reading - zero_G_z) / accScale);
+   return (reading - zero_G_z) / accScale;
 }
 
-int getGyroRate(int pin)
+double getGyroRate(int pin)
 {
- delay(1);
   int count = 5;
 double reading = analogRead(pin);
 
@@ -107,10 +106,16 @@ double reading = analogRead(pin);
    reading+=analogRead(pin);
  }
  reading = reading/count; 
+ 
  if(pin == xgyroPin)
-   return int((reading - gyroZeroX) / gyroScale); //in degrees/sec
+ {
+   reading = (reading - gyroZeroX) / gyroScale; //in degrees/sec
+  if(reading <= 0.25 && reading >= -0.25)
+     reading = 0;
+   return reading;
+ }
  else
-   return int((reading - gyroZeroY) / gyroScale); 
+   return (reading - gyroZeroY) / gyroScale; 
 }
 
 void loop()
@@ -126,8 +131,7 @@ void loop()
   //need to think about what angle should be starting position
   double accXangle = ((atan2(accX, accZ)+PI)*RAD_TO_DEG);
   double accYangle = (atan2(accY, accZ)+PI)*RAD_TO_DEG;
-  
-  
+   
   //=================
   //gyro code
   
@@ -136,32 +140,34 @@ void loop()
     
   double gyroXangle = getGyroRate(xgyroPin)*timeDiff;
   double gyroYangle = getGyroRate(ygyroPin)*timeDiff;
-  
+
+/*  
   // Calculate the angle using a Complimentary filter
 if(gyroXangle != 0)
   compAngleX = 0.93*(compAngleX+gyroXangle)+(0.07*accXangle); 
 if(gyroYangle != 0)
   compAngleY = 0.93*(compAngleY+gyroYangle)+(0.07*accYangle); 
 
+
   Serial.print("compAngleX: ");
   Serial.print(compAngleX);Serial.print("\t");
     Serial.print("compAngleY: ");
   Serial.print(compAngleY); Serial.print("\t");
-/*
+*/
     Serial.print("gyroXangle: ");
   Serial.print(gyroXangle); Serial.print("\t");
-  Serial.print("gyroYangle: ");
-  Serial.print(gyroYangle);  Serial.print("\t");
- */
- /*
-  curX += compAngleX;
-  curY += compAngleY;
-  Serial.print("Current x: ");
+//  Serial.print("gyroYangle: ");
+//  Serial.print(gyroYangle);  Serial.print("\t");
+
+ 
+  curX += (gyroXangle)*3;   
+  if(curX < 0)
+    curX += 180;
+  curY += gyroYangle;
+  
+//  Serial.print("Cur x: ");
   Serial.print(curX); Serial.print("\t");
 
-  Serial.print("Current y: ");
-  Serial.print(curY); Serial.print("\t");
-*/
   Serial.print("\n");
 
   lastLoopTime = micros();
