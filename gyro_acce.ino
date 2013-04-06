@@ -46,7 +46,7 @@ int sampleDelay = 200;   //number of milliseconds between readings
 double compAngleX = 0; // Calculate the angle using a Comlimentary Filter
 double compAngleY = 0;
 
-double curX = 180;
+double curX = 0;
 double curY = 0;
 
 void setup()
@@ -139,6 +139,8 @@ void loop()
   timeDiff = (micros() - lastLoopTime)/1000000;   
     
   double gyroXangle = getGyroRate(xgyroPin)*timeDiff;
+  if(gyroXangle < .26 && gyroXangle > -.26)
+    gyroXangle = 0;
   double gyroYangle = getGyroRate(ygyroPin)*timeDiff;
 
 /*  
@@ -162,7 +164,9 @@ if(gyroYangle != 0)
  
   curX += (gyroXangle)*3;   
   if(curX < 0)
-    curX += 180;
+    curX += 360;
+    if(curX > 360)
+    curX -= 360;
   curY += gyroYangle;
   
 //  Serial.print("Cur x: ");
