@@ -31,11 +31,14 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jackie/Projects/WartHog/WarthogCatkin/src
+CMAKE_SOURCE_DIR = /home/robo/Projects/WartHog/WarthogCatkin/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jackie/Projects/WartHog/WarthogCatkin/build
+CMAKE_BINARY_DIR = /home/robo/Projects/WartHog/WarthogCatkin/build
 
 # Utility rule file for tests.
 
@@ -57,6 +60,6 @@ CMakeFiles/tests.dir/clean:
 .PHONY : CMakeFiles/tests.dir/clean
 
 CMakeFiles/tests.dir/depend:
-	cd /home/jackie/Projects/WartHog/WarthogCatkin/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jackie/Projects/WartHog/WarthogCatkin/src /home/jackie/Projects/WartHog/WarthogCatkin/src /home/jackie/Projects/WartHog/WarthogCatkin/build /home/jackie/Projects/WartHog/WarthogCatkin/build /home/jackie/Projects/WartHog/WarthogCatkin/build/CMakeFiles/tests.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/robo/Projects/WartHog/WarthogCatkin/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robo/Projects/WartHog/WarthogCatkin/src /home/robo/Projects/WartHog/WarthogCatkin/src /home/robo/Projects/WartHog/WarthogCatkin/build /home/robo/Projects/WartHog/WarthogCatkin/build /home/robo/Projects/WartHog/WarthogCatkin/build/CMakeFiles/tests.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/tests.dir/depend
 

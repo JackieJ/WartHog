@@ -3,5 +3,5 @@
 
 CATKIN_SHELL=zsh
 emulate sh # emulate POSIX
-. "/home/jackie/Projects/WartHog/WarthogCatkin/devel/setup.sh"
+. "/home/robo/Projects/WartHog/WarthogCatkin/devel/setup.sh"
 emulate zsh # back to zsh mode

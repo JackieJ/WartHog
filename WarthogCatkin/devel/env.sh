@@ -2,11 +2,10 @@
 # generated from catkin/cmake/templates/env.sh.in
 
 if [ $# -eq 0 ] ; then
-  /bin/echo "Entering environment at '/home/jackie/Projects/WartHog/WarthogCatkin/devel', type 'exit' to leave"
-  . "/home/jackie/Projects/WartHog/WarthogCatkin/devel/setup.sh"
-  "$SHELL" -i
-  /bin/echo "Exiting environment at '/home/jackie/Projects/WartHog/WarthogCatkin/devel'"
+  /bin/echo "Usage: env.sh COMMANDS"
+  /bin/echo "Calling env.sh without arguments is not supported anymore. Instead spawn a subshell and source a setup file manually."
+  exit 1
 else
-  . "/home/jackie/Projects/WartHog/WarthogCatkin/devel/setup.sh"
+  . "/home/robo/Projects/WartHog/WarthogCatkin/devel/setup.sh"
   exec "$@"
 fi

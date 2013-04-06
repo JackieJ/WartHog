@@ -2,4 +2,4 @@
 # generated from catkin/cmake/templates/setup.bash.in
 
 CATKIN_SHELL=bash
-. "/home/jackie/Projects/WartHog/WarthogCatkin/install/setup.sh"
+. "/home/robo/Projects/WartHog/WarthogCatkin/install/setup.sh"
