@@ -1,6 +1,0 @@
-/home/jackie/Projects/WartHog/WartHogCatkin/build/CMakeFiles/clean_test_results.dir
-/home/jackie/Projects/WartHog/WartHogCatkin/build/CMakeFiles/doxygen.dir
-/home/jackie/Projects/WartHog/WartHogCatkin/build/gtest/CMakeFiles/gtest.dir
-/home/jackie/Projects/WartHog/WartHogCatkin/build/gtest/CMakeFiles/gtest_main.dir
-/home/jackie/Projects/WartHog/WartHogCatkin/build/CMakeFiles/run_tests.dir
-/home/jackie/Projects/WartHog/WartHogCatkin/build/CMakeFiles/tests.dir
