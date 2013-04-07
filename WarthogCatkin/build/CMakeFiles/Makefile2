@@ -255,6 +255,21 @@ clean: gtest/CMakeFiles/gtest_main.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Directory level rules for directory warthog_main_package
+
+# Convenience name for "all" pass in the directory.
+warthog_main_package/all:
+.PHONY : warthog_main_package/all
+
+# Convenience name for "clean" pass in the directory.
+warthog_main_package/clean:
+.PHONY : warthog_main_package/clean
+
+# Convenience name for "preinstall" pass in the directory.
+warthog_main_package/preinstall:
+.PHONY : warthog_main_package/preinstall
+
+#=============================================================================
 # Special targets to cleanup operation of make.
 
 # Special rule to run CMake to check the build system integrity.
