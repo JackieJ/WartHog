@@ -30,7 +30,7 @@ void loop(){
    while(Wire.available() < 2);         //while there is a byte to receive
    highByte = Wire.read();           //reads the byte as an integer
    lowByte = Wire.read();
-   int bearing = ((highByte<<8)+lowByte)/10; 
+   float bearing = ((highByte<<8)+lowByte)/10; 
    
    Serial.println(bearing);
    delay(100);
