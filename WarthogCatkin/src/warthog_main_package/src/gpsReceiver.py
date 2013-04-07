@@ -14,7 +14,9 @@ class GPSD():
                 self.session = gps()
 		self.session.stream(WATCH_ENABLE|WATCH_NEWSTYLE)
 		self.currentVal = None
-		self.fixPublisher = rospy.Publisher('fix', GPSFix)
+		self.fixPublisher = rospy.Publisher('/fix', GPSFix)
+                self.currentFix = GPSFix()
+                
 	def get_currentVal(self):
 		return self.currentVal
 	
@@ -31,7 +33,7 @@ class GPSD():
 			self.currentFix.longitude = self.currentVal['lon']
                 except Exception as err:
                         self.currentFix.latitude = 0
-                        self.currentFix.latitude = 0
+                        self.currentFix.longitude = 0
                         #print >>sys.stderr, err
 		self.fixPublisher.publish(self.currentFix)
                 
