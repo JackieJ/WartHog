@@ -1,0 +1,15 @@
+<package>
+  <description brief="compass">
+
+     compass
+
+  </description>
+  <author>jennifer</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/compass</url>
+  <depend package="rosserial_arduino"/>
+  <depend package="std_msgs"/>
+</package>
+
+
