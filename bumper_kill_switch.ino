@@ -1,6 +1,12 @@
 //kill switch
 //press once, true
 //press again, false
+//press again, true
+//etc
+
+//bumpers
+//press button, true
+//release button, false
 
 #include <ros.h>
 #include <std_msgs/Bool.h>
