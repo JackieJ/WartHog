@@ -1,6 +1,0 @@
-Name: wiimote
-Description: Description of wiimote
-Version: 1.9.9
-Cflags: -I/home/robo/Projects/ROSCatkinWorkspace/devel/include
-Libs: -L/home/robo/Projects/ROSCatkinWorkspace/devel/lib 
-Requires: geometry_msgs sensor_msgs std_msgs std_srvs rospy roslib genmsg

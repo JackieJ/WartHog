@@ -1,7 +1,0 @@
-set(_CATKIN_CURRENT_PACKAGE "ps3joy")
-set(ps3joy_MAINTAINER "Jonathan Bohren <jbo@jhu.edu>")
-set(ps3joy_DEPRECATED "")
-set(ps3joy_VERSION "1.9.9")
-set(ps3joy_BUILD_DEPENDS "diagnostic_msgs" "sensor_msgs" "rospy" "rosgraph" "libusb-dev" "joystick" "bluez" "python-bluez")
-set(ps3joy_RUN_DEPENDS "diagnostic_msgs" "sensor_msgs" "rospy" "rosgraph" "libusb-dev" "joystick" "bluez" "python-bluez")
-set(ps3joy_BUILDTOOL_DEPENDS "catkin")

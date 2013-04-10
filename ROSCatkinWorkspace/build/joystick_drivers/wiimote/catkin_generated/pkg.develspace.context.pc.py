@@ -1,7 +1,0 @@
-CATKIN_PACKAGE_PREFIX=""
-PROJECT_ABSOLUTE_INCLUDE_DIRS="/home/robo/Projects/ROSCatkinWorkspace/devel/include"
-PROJECT_CATKIN_DEPENDS="geometry_msgs;sensor_msgs;std_msgs;std_srvs;rospy;roslib;genmsg"
-PKG_CONFIG_LIBRARIES_WITH_PREFIX=""
-PROJECT_NAME="wiimote"
-PROJECT_SPACE_DIR="/home/robo/Projects/ROSCatkinWorkspace/devel"
-PROJECT_VERSION="1.9.9"

@@ -1,7 +1,0 @@
-set(_CATKIN_CURRENT_PACKAGE "joy")
-set(joy_MAINTAINER "Jonathan Bohren <jbo@jhu.edu>")
-set(joy_DEPRECATED "")
-set(joy_VERSION "1.9.9")
-set(joy_BUILD_DEPENDS "roscpp" "diagnostic_updater" "sensor_msgs" "joystick")
-set(joy_RUN_DEPENDS "roscpp" "diagnostic_updater" "sensor_msgs" "joystick")
-set(joy_BUILDTOOL_DEPENDS "catkin")

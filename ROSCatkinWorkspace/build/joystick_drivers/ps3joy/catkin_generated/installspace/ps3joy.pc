@@ -1,6 +1,0 @@
-Name: ps3joy
-Description: Description of ps3joy
-Version: 1.9.9
-Cflags: -I
-Libs: -L/home/robo/Projects/ROSCatkinWorkspace/install/lib 
-Requires: diagnostic_msgs sensor_msgs rospy rosgraph

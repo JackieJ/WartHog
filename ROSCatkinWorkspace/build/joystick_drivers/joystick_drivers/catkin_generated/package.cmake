@@ -1,7 +1,0 @@
-set(_CATKIN_CURRENT_PACKAGE "joystick_drivers")
-set(joystick_drivers_MAINTAINER "Jonathan Bohren <jbo@jhu.edu>")
-set(joystick_drivers_DEPRECATED "")
-set(joystick_drivers_VERSION "1.9.9")
-set(joystick_drivers_BUILD_DEPENDS )
-set(joystick_drivers_RUN_DEPENDS "joy" "ps3joy" "spacenav_node" "wiimote")
-set(joystick_drivers_BUILDTOOL_DEPENDS )
