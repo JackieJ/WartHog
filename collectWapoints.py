@@ -19,10 +19,7 @@ class GPSD():
 	def run(self):
 		while True:
                         self.currentVal = self.session.next()
-                        try:
-                                pass
-                        except KeyboardInterrupt:
-                                self.collect();
+                        self.collect()
                         time.sleep(0.5)
                                 
         def collect(self):
