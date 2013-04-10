@@ -22,9 +22,8 @@ class GPSD():
 	
 	def run(self):
 		while not rospy.is_shutdown():
-                        while True:
-                                self.currentVal = self.session.next()
-                                self.publish()
+                        self.currentVal = self.session.next()
+                        self.publish()
         def publish(self):
 		try:
 			#print >> sys.stderr, type(self.currentVal['lat'])
