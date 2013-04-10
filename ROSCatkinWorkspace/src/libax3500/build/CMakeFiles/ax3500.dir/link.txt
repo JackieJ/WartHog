@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../lib/libax3500.a  CMakeFiles/ax3500.dir/src/AX3500.o
+/usr/bin/ranlib ../lib/libax3500.a

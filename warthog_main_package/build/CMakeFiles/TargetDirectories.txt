@@ -4,10 +4,12 @@
 /home/robo/Projects/WartHog/warthog_main_package/build/CMakeFiles/doxygen.dir
 /home/robo/Projects/WartHog/warthog_main_package/build/gtest/CMakeFiles/gtest.dir
 /home/robo/Projects/WartHog/warthog_main_package/build/gtest/CMakeFiles/gtest_main.dir
+/home/robo/Projects/WartHog/warthog_main_package/build/CMakeFiles/motor.dir
 /home/robo/Projects/WartHog/warthog_main_package/build/CMakeFiles/rosbuild_clean-test-results.dir
 /home/robo/Projects/WartHog/warthog_main_package/build/CMakeFiles/rosbuild_precompile.dir
 /home/robo/Projects/WartHog/warthog_main_package/build/CMakeFiles/rosbuild_premsgsrvgen.dir
 /home/robo/Projects/WartHog/warthog_main_package/build/CMakeFiles/rospack_genmsg.dir
+/home/robo/Projects/WartHog/warthog_main_package/build/CMakeFiles/rospack_genmsg_all.dir
 /home/robo/Projects/WartHog/warthog_main_package/build/CMakeFiles/rospack_genmsg_libexe.dir
 /home/robo/Projects/WartHog/warthog_main_package/build/CMakeFiles/rospack_gensrv.dir
 /home/robo/Projects/WartHog/warthog_main_package/build/CMakeFiles/run_tests.dir

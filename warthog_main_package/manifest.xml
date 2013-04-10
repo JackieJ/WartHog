@@ -13,6 +13,7 @@
   <depend package="roscpp"/>
   <depend package="rospy"/>
   <depend package="gps_common"/>
+  <depend package="libax3500"/>
 </package>
 
 

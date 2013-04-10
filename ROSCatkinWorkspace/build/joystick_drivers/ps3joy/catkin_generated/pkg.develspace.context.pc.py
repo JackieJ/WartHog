@@ -1,0 +1,7 @@
+CATKIN_PACKAGE_PREFIX=""
+PROJECT_ABSOLUTE_INCLUDE_DIRS=""
+PROJECT_CATKIN_DEPENDS="diagnostic_msgs;sensor_msgs;rospy;rosgraph"
+PKG_CONFIG_LIBRARIES_WITH_PREFIX=""
+PROJECT_NAME="ps3joy"
+PROJECT_SPACE_DIR="/home/robo/Projects/ROSCatkinWorkspace/devel"
+PROJECT_VERSION="1.9.9"

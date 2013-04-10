@@ -156,8 +156,8 @@ CMAKE_SKIP_RPATH:BOOL=NO
 //Path to a program.
 CMAKE_STRIP:FILEPATH=/usr/bin/strip
 
-//The CMake toolchain file
-CMAKE_TOOLCHAIN_FILE:FILEPATH=/opt/ros/groovy/share/ros/core/rosbuild/rostoolchain.cmake
+//No help, variable specified on the command line.
+CMAKE_TOOLCHAIN_FILE:UNINITIALIZED=/opt/ros/groovy/share/ros/core/rosbuild/rostoolchain.cmake
 
 //If true, cmake will use relative paths in makefiles and projects.
 CMAKE_USE_RELATIVE_PATHS:BOOL=OFF
@@ -251,6 +251,9 @@ _CATKIN_GTEST_INCLUDE:FILEPATH=_CATKIN_GTEST_INCLUDE-NOTFOUND
 
 //Path to a file.
 _CATKIN_GTEST_SRC:FILEPATH=/usr/src/gtest/src/gtest.cc
+
+//Path to a file.
+_file_name:FILEPATH=/home/robo/Projects/WartHog/warthog_main_package/src/motor.cpp
 
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/groovy/share/catkin/cmake
@@ -473,17 +476,17 @@ PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
 // it will install things.
 PYTHON_INSTALL_DIR:INTERNAL=lib/python2.7/dist-packages
 _rosbuild_EXPORTS:INTERNAL=
-_rosbuild_cached_flag_time:INTERNAL=1365561310.13
+_rosbuild_cached_flag_time:INTERNAL=1365566724.92
 _roslang_LANGS:INTERNAL=
-_rospack_deps_manifests_invoke_result:INTERNAL=/opt/ros/groovy/share/cpp_common/package.xml;/opt/ros/groovy/share/rostime/package.xml;/opt/ros/groovy/share/roscpp_traits/package.xml;/opt/ros/groovy/share/roscpp_serialization/package.xml;/opt/ros/groovy/share/genmsg/package.xml;/opt/ros/groovy/share/genpy/package.xml;/opt/ros/groovy/share/message_runtime/package.xml;/opt/ros/groovy/share/std_msgs/package.xml;/opt/ros/groovy/share/geometry_msgs/package.xml;/opt/ros/groovy/share/sensor_msgs/package.xml;/opt/ros/groovy/share/rosconsole/package.xml;/opt/ros/groovy/share/rosgraph_msgs/package.xml;/opt/ros/groovy/share/xmlrpcpp/package.xml;/opt/ros/groovy/share/roscpp/package.xml;/opt/ros/groovy/share/rosgraph/package.xml;/opt/ros/groovy/share/catkin/package.xml;/opt/ros/groovy/share/rospack/package.xml;/opt/ros/groovy/share/roslib/package.xml;/opt/ros/groovy/share/rospy/package.xml
-_rospack_msgsrv_gen_invoke_result:INTERNAL=
+_rospack_deps_manifests_invoke_result:INTERNAL=/opt/ros/groovy/share/cpp_common/package.xml;/opt/ros/groovy/share/rostime/package.xml;/opt/ros/groovy/share/roscpp_traits/package.xml;/opt/ros/groovy/share/roscpp_serialization/package.xml;/opt/ros/groovy/share/genmsg/package.xml;/opt/ros/groovy/share/genpy/package.xml;/opt/ros/groovy/share/message_runtime/package.xml;/opt/ros/groovy/share/std_msgs/package.xml;/opt/ros/groovy/share/geometry_msgs/package.xml;/opt/ros/groovy/share/sensor_msgs/package.xml;/opt/ros/groovy/share/rosconsole/package.xml;/opt/ros/groovy/share/rosgraph_msgs/package.xml;/opt/ros/groovy/share/xmlrpcpp/package.xml;/opt/ros/groovy/share/roscpp/package.xml;/opt/ros/groovy/share/rosgraph/package.xml;/opt/ros/groovy/share/catkin/package.xml;/opt/ros/groovy/share/rospack/package.xml;/opt/ros/groovy/share/roslib/package.xml;/opt/ros/groovy/share/rospy/package.xml;/opt/ros/groovy/share/message_filters/package.xml;/opt/ros/groovy/share/nav_msgs/package.xml;/home/robo/Projects/WartHog/gps_umd/gps_common/manifest.xml;/home/robo/Projects/WartHog/libax3500/manifest.xml
+_rospack_msgsrv_gen_invoke_result:INTERNAL=/home/robo/Projects/WartHog/gps_umd/gps_common/msg_gen/generated
 roslib_path:INTERNAL=/opt/ros/groovy/share/roslib
 warthog_main_package_CFLAGS_OTHER:INTERNAL=
 warthog_main_package_INCLUDEDIR:INTERNAL=
-warthog_main_package_INCLUDE_DIRS:INTERNAL=/opt/ros/groovy/include
-warthog_main_package_LDFLAGS_OTHER:INTERNAL=
-warthog_main_package_LIBRARIES:INTERNAL=roscpp;:/usr/lib/libboost_signals-mt.so;:/usr/lib/libboost_filesystem-mt.so;rosconsole;:/usr/lib/libboost_regex-mt.so;:/usr/lib/liblog4cxx.so;xmlrpcpp;roscpp_serialization;rostime;:/usr/lib/libboost_date_time-mt.so;:/usr/lib/libboost_system-mt.so;:/usr/lib/libboost_thread-mt.so;pthread;cpp_common
-warthog_main_package_LIBRARY_DIRS:INTERNAL=/opt/ros/groovy/lib
-warthog_main_package_cached_manifest_list:INTERNAL=/home/robo/Projects/WartHog/warthog_main_package/manifest.xml;/opt/ros/groovy/share/cpp_common/package.xml;/opt/ros/groovy/share/rostime/package.xml;/opt/ros/groovy/share/roscpp_traits/package.xml;/opt/ros/groovy/share/roscpp_serialization/package.xml;/opt/ros/groovy/share/genmsg/package.xml;/opt/ros/groovy/share/genpy/package.xml;/opt/ros/groovy/share/message_runtime/package.xml;/opt/ros/groovy/share/std_msgs/package.xml;/opt/ros/groovy/share/geometry_msgs/package.xml;/opt/ros/groovy/share/sensor_msgs/package.xml;/opt/ros/groovy/share/rosconsole/package.xml;/opt/ros/groovy/share/rosgraph_msgs/package.xml;/opt/ros/groovy/share/xmlrpcpp/package.xml;/opt/ros/groovy/share/roscpp/package.xml;/opt/ros/groovy/share/rosgraph/package.xml;/opt/ros/groovy/share/catkin/package.xml;/opt/ros/groovy/share/rospack/package.xml;/opt/ros/groovy/share/roslib/package.xml;/opt/ros/groovy/share/rospy/package.xml
-warthog_main_package_temp:INTERNAL=
+warthog_main_package_INCLUDE_DIRS:INTERNAL=/home/robo/Projects/WartHog/gps_umd/gps_common/include;/home/robo/Projects/WartHog/gps_umd/gps_common/msg/cpp;/home/robo/Projects/WartHog/gps_umd/gps_common/srv/cpp;/home/robo/Projects/WartHog/gps_umd/gps_common/msg_gen/cpp/include;/home/robo/Projects/WartHog/libax3500/include;/opt/ros/groovy/include
+warthog_main_package_LDFLAGS_OTHER:INTERNAL=-Wl,-rpath,/home/robo/Projects/WartHog/gps_umd/gps_common/lib -Wl,-rpath,/home/robo/Projects/WartHog/libax3500/lib
+warthog_main_package_LIBRARIES:INTERNAL=message_filters;roscpp;:/usr/lib/libboost_signals-mt.so;:/usr/lib/libboost_filesystem-mt.so;rosconsole;:/usr/lib/libboost_regex-mt.so;:/usr/lib/liblog4cxx.so;xmlrpcpp;roscpp_serialization;rostime;:/usr/lib/libboost_date_time-mt.so;:/usr/lib/libboost_system-mt.so;:/usr/lib/libboost_thread-mt.so;pthread;cpp_common;libax3500.a;boost_system;boost_thread
+warthog_main_package_LIBRARY_DIRS:INTERNAL=/home/robo/Projects/WartHog/gps_umd/gps_common/lib;/home/robo/Projects/WartHog/libax3500/lib;/opt/ros/groovy/lib
+warthog_main_package_cached_manifest_list:INTERNAL=/home/robo/Projects/WartHog/warthog_main_package/manifest.xml;/opt/ros/groovy/share/cpp_common/package.xml;/opt/ros/groovy/share/rostime/package.xml;/opt/ros/groovy/share/roscpp_traits/package.xml;/opt/ros/groovy/share/roscpp_serialization/package.xml;/opt/ros/groovy/share/genmsg/package.xml;/opt/ros/groovy/share/genpy/package.xml;/opt/ros/groovy/share/message_runtime/package.xml;/opt/ros/groovy/share/std_msgs/package.xml;/opt/ros/groovy/share/geometry_msgs/package.xml;/opt/ros/groovy/share/sensor_msgs/package.xml;/opt/ros/groovy/share/rosconsole/package.xml;/opt/ros/groovy/share/rosgraph_msgs/package.xml;/opt/ros/groovy/share/xmlrpcpp/package.xml;/opt/ros/groovy/share/roscpp/package.xml;/opt/ros/groovy/share/rosgraph/package.xml;/opt/ros/groovy/share/catkin/package.xml;/opt/ros/groovy/share/rospack/package.xml;/opt/ros/groovy/share/roslib/package.xml;/opt/ros/groovy/share/rospy/package.xml;/opt/ros/groovy/share/message_filters/package.xml;/opt/ros/groovy/share/nav_msgs/package.xml;/home/robo/Projects/WartHog/gps_umd/gps_common/manifest.xml;/home/robo/Projects/WartHog/libax3500/manifest.xml;/home/robo/Projects/WartHog/gps_umd/gps_common/msg_gen/generated
+warthog_main_package_temp:INTERNAL=-Wl,-rpath,/home/robo/Projects/WartHog/gps_umd/gps_common/lib;-Wl,-rpath,/home/robo/Projects/WartHog/libax3500/lib
 

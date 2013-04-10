@@ -42,7 +42,7 @@ import platform
 import sys
 
 # environment at generation time
-CMAKE_PREFIX_PATH = '/opt/ros/groovy;/home/robo/Projects/WartHog/WarthogCatkin/devel'.split(';')
+CMAKE_PREFIX_PATH = '/opt/ros/groovy'.split(';')
 setup_dir = '/home/robo/Projects/WartHog/gps_umd/gps_common/build/devel'
 if setup_dir not in CMAKE_PREFIX_PATH:
     CMAKE_PREFIX_PATH.insert(0, setup_dir)

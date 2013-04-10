@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/robo/Projects/ROSCatkinWorkspace/src/controlRobo/build/devel/setup.sh

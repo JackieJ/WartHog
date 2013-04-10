@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "wiimote")
+set(wiimote_MAINTAINER "Jonathan Bohren <jbo@jhu.edu>")
+set(wiimote_DEPRECATED "")
+set(wiimote_VERSION "1.9.9")
+set(wiimote_BUILD_DEPENDS "genmsg" "geometry_msgs" "sensor_msgs" "python-cwiid" "python-numpy" "roslib" "rospy" "std_msgs" "std_srvs")
+set(wiimote_RUN_DEPENDS "genmsg" "geometry_msgs" "python-cwiid" "python-numpy" "sensor_msgs" "std_msgs" "std_srvs" "rospy" "roslib" "python-numpy" "python-cwiid")
+set(wiimote_BUILDTOOL_DEPENDS "catkin")

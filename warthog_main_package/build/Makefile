@@ -192,6 +192,19 @@ doxygen/fast:
 .PHONY : doxygen/fast
 
 #=============================================================================
+# Target rules for targets named motor
+
+# Build rule for target.
+motor: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 motor
+.PHONY : motor
+
+# fast build rule for target.
+motor/fast:
+	$(MAKE) -f CMakeFiles/motor.dir/build.make CMakeFiles/motor.dir/build
+.PHONY : motor/fast
+
+#=============================================================================
 # Target rules for targets named rosbuild_clean-test-results
 
 # Build rule for target.
@@ -242,6 +255,19 @@ rospack_genmsg: cmake_check_build_system
 rospack_genmsg/fast:
 	$(MAKE) -f CMakeFiles/rospack_genmsg.dir/build.make CMakeFiles/rospack_genmsg.dir/build
 .PHONY : rospack_genmsg/fast
+
+#=============================================================================
+# Target rules for targets named rospack_genmsg_all
+
+# Build rule for target.
+rospack_genmsg_all: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rospack_genmsg_all
+.PHONY : rospack_genmsg_all
+
+# fast build rule for target.
+rospack_genmsg_all/fast:
+	$(MAKE) -f CMakeFiles/rospack_genmsg_all.dir/build.make CMakeFiles/rospack_genmsg_all.dir/build
+.PHONY : rospack_genmsg_all/fast
 
 #=============================================================================
 # Target rules for targets named rospack_genmsg_libexe
@@ -373,6 +399,30 @@ gtest_main/fast:
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
 .PHONY : gtest_main/fast
 
+src/motor.o: src/motor.cpp.o
+.PHONY : src/motor.o
+
+# target to build an object file
+src/motor.cpp.o:
+	$(MAKE) -f CMakeFiles/motor.dir/build.make CMakeFiles/motor.dir/src/motor.cpp.o
+.PHONY : src/motor.cpp.o
+
+src/motor.i: src/motor.cpp.i
+.PHONY : src/motor.i
+
+# target to preprocess a source file
+src/motor.cpp.i:
+	$(MAKE) -f CMakeFiles/motor.dir/build.make CMakeFiles/motor.dir/src/motor.cpp.i
+.PHONY : src/motor.cpp.i
+
+src/motor.s: src/motor.cpp.s
+.PHONY : src/motor.s
+
+# target to generate assembly for a file
+src/motor.cpp.s:
+	$(MAKE) -f CMakeFiles/motor.dir/build.make CMakeFiles/motor.dir/src/motor.cpp.s
+.PHONY : src/motor.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -388,11 +438,13 @@ help:
 	@echo "... install/local"
 	@echo "... install/strip"
 	@echo "... list_install_components"
+	@echo "... motor"
 	@echo "... rebuild_cache"
 	@echo "... rosbuild_clean-test-results"
 	@echo "... rosbuild_precompile"
 	@echo "... rosbuild_premsgsrvgen"
 	@echo "... rospack_genmsg"
+	@echo "... rospack_genmsg_all"
 	@echo "... rospack_genmsg_libexe"
 	@echo "... rospack_gensrv"
 	@echo "... run_tests"
@@ -403,6 +455,9 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
+	@echo "... src/motor.o"
+	@echo "... src/motor.i"
+	@echo "... src/motor.s"
 .PHONY : help
 
 

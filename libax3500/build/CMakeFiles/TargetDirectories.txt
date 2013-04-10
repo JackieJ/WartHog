@@ -1,0 +1,2 @@
+/home/robo/Projects/WartHog/libax3500/build/CMakeFiles/ax3500.dir
+/home/robo/Projects/WartHog/libax3500/build/CMakeFiles/uninstall.dir

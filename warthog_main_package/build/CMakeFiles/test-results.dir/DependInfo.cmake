@@ -10,7 +10,13 @@ SET(CMAKE_TARGET_LINKED_INFO_FILES
 # The include file search paths:
 SET(CMAKE_C_TARGET_INCLUDE_PATH
   "../include"
+  "/home/robo/Projects/WartHog/gps_umd/gps_common/include"
+  "/home/robo/Projects/WartHog/gps_umd/gps_common/msg/cpp"
+  "/home/robo/Projects/WartHog/gps_umd/gps_common/srv/cpp"
+  "/home/robo/Projects/WartHog/gps_umd/gps_common/msg_gen/cpp/include"
+  "/home/robo/Projects/WartHog/libax3500/include"
   "/opt/ros/groovy/include"
+  "../msg_gen/cpp/include"
   )
 SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
 SET(CMAKE_Fortran_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})

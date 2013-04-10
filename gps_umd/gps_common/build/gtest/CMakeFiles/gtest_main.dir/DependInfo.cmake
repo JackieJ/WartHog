@@ -21,6 +21,7 @@ SET(CMAKE_TARGET_LINKED_INFO_FILES
 # The include file search paths:
 SET(CMAKE_C_TARGET_INCLUDE_PATH
   "/home/robo/Projects/WartHog/gps_umd/gps_common/include"
+  "/opt/ros/groovy/include"
   "/usr/src/gtest/include"
   "/usr/src/gtest"
   )

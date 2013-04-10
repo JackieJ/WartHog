@@ -1,0 +1,6 @@
+Name: spacenav_node
+Description: Description of spacenav_node
+Version: 1.9.9
+Cflags: -I
+Libs: -L/home/robo/Projects/ROSCatkinWorkspace/install/lib 
+Requires: roscpp geometry_msgs sensor_msgs

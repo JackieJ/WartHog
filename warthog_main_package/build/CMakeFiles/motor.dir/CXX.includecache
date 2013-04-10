@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/robo/Projects/WartHog/libax3500/include/AX3500.h
+vector
+-
+boost/asio.hpp
+-
+boost/shared_ptr.hpp
+-
+boost/shared_array.hpp
+-
+boost/thread.hpp
+-
+boost/thread/condition.hpp
+-
+boost/tuple/tuple.hpp
+-
+iostream
+-
+
+/home/robo/Projects/WartHog/warthog_main_package/src/motor.cpp
+stdlib.h
+-
+stdio.h
+-
+AX3500.h
+/home/robo/Projects/WartHog/warthog_main_package/src/AX3500.h
+
