@@ -8,6 +8,9 @@
 //press button, true
 //release button, false
 
+//referred to this tutorial: 
+//http://ros.org/wiki/rosserial_arduino/Tutorials/Push%20Button
+
 #include <ros.h>
 #include <std_msgs/Bool.h>
 
@@ -20,7 +23,6 @@ ros::Publisher pub_bump("bump", &bump_msg);
 
 const int bump_pin = 7;
 const int kill_pin = 6;
-const int led_pin = 13;
 
 long debounce_delay=50;
 
