@@ -1,7 +1,0 @@
-CATKIN_PACKAGE_PREFIX=""
-PROJECT_ABSOLUTE_INCLUDE_DIRS="/home/robo/Projects/WartHog/WarthogCatkin/install/include"
-PROJECT_CATKIN_DEPENDS=""
-PKG_CONFIG_LIBRARIES_WITH_PREFIX=""
-PROJECT_NAME="warthog_main_package"
-PROJECT_SPACE_DIR="/home/robo/Projects/WartHog/WarthogCatkin/install"
-PROJECT_VERSION="0.0.1"

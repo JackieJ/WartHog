@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/robo/Projects/WartHog/gps_umd/gpsd_client/build/devel/setup.sh

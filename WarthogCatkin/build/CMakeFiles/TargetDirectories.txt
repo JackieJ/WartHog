@@ -1,6 +1,0 @@
-/home/robo/Projects/WartHog/WarthogCatkin/build/CMakeFiles/clean_test_results.dir
-/home/robo/Projects/WartHog/WarthogCatkin/build/CMakeFiles/doxygen.dir
-/home/robo/Projects/WartHog/WarthogCatkin/build/gtest/CMakeFiles/gtest.dir
-/home/robo/Projects/WartHog/WarthogCatkin/build/gtest/CMakeFiles/gtest_main.dir
-/home/robo/Projects/WartHog/WarthogCatkin/build/CMakeFiles/run_tests.dir
-/home/robo/Projects/WartHog/WarthogCatkin/build/CMakeFiles/tests.dir

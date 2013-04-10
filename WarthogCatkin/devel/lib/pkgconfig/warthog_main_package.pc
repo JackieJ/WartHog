@@ -1,6 +1,0 @@
-Name: warthog_main_package
-Description: Description of warthog_main_package
-Version: 0.0.1
-Cflags: -I/home/robo/Projects/WartHog/WarthogCatkin/src/warthog_main_package/include
-Libs: -L/home/robo/Projects/WartHog/WarthogCatkin/devel/lib 
-Requires: 
