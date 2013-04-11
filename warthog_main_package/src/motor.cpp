@@ -18,8 +18,6 @@ void setVelocity(const turtlesim::Velocity::ConstPtr& msg) {
 
 int main(int argc, char **argv) {
   ros::init(argc, argv, "WarthogControl_node");
-
-  
   motor.Open("/dev/ttyUSB0", true); // Enable safety cutoff
   std::cout << "Connecting to motor controller...\n";
   ros::NodeHandle n;

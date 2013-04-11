@@ -33,7 +33,7 @@ class GPSD():
                         print >> sys.stderr, "no lon lat reading yet!"
         
         def dumpToFile(self):
-                file = open('./warthog_main_package/src/waypoints.yaml', "w+")
+                file = open('./src/waypoints.yaml', "w+")
                 yaml.dump(rList, file)
 
 if __name__ == '__main__':
