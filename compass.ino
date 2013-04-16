@@ -1,3 +1,11 @@
+#include <Wire.h>
+#include <ros.h>
+#include <std_msgs/Float32.h>
+
+ros::NodeHandle nh;
+std_msgs::Float32 compass_msg;
+ros::Publisher p("compass", &compass_msg);
+
 /*
 CMPS03 with arduino I2C example
 
@@ -9,13 +17,14 @@ Both SDA and SCL are also connected to the +5v via a couple of 1k8 resistors.
 A switch to callibrate the CMPS03 can be connected between pin 6 of the CMPS03 and the ground.
 */
 
-#include <Wire.h>
-
 #define ADDRESS 0x60 //defines address of compass
 
 void setup(){
   Wire.begin(); //conects I2C
-  Serial.begin(9600);
+  nh.initNode();
+  nh.advertise(p);
+  
+  Serial.begin(57600);
 }
 
 void loop(){
@@ -31,8 +40,11 @@ void loop(){
    highByte = Wire.read();           //reads the byte as an integer
    lowByte = Wire.read();
    float bearing = ((highByte<<8)+lowByte)/10; 
+   compass_msg.data = bearing;
    
-   Serial.println(bearing);
+   p.publish(&compass_msg);
+   nh.spinOnce();
+   
    delay(100);
 }
 

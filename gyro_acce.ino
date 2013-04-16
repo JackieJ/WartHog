@@ -1,9 +1,11 @@
 #include <Wire.h>
 #include <math.h>
 #include <ros.h>
-#include <std_msgs/Empty.h>
+#include <std_msgs/Float32.h>
 
 ros::NodeHandle nh; 
+std_msgs::Float32 gyro_msg;
+ros::Publisher p("gyro", &gyro_msg);
 
 #define RAD_TO_DEG  57296 / 1000
 // these constants describe the pins. They won't change:
@@ -46,16 +48,16 @@ int sampleDelay = 200;   //number of milliseconds between readings
 double compAngleX = 0; // Calculate the angle using a Comlimentary Filter
 double compAngleY = 0;
 
-double curX = 0;
+float curX = 0;
 double curY = 0;
 
 void setup()
 {
   nh.initNode();
-  //nh.subscribe(sub);
+  nh.advertise(p);
   
   // initialize the serial communications:
-  Serial.begin(9600);
+  Serial.begin(57600);
 
   //Make sure the analog-to-digital converter takes 
   //its reference voltage from the AREF pin
@@ -122,15 +124,15 @@ void loop()
 {
   //acceleration of each axis in g's
   float accX, accY, accZ;
-  accX = getAccInG(xaccPin);
-  accY = getAccInG(yaccPin);
-  accZ = getAccInG(zaccPin);
+//  accX = getAccInG(xaccPin);
+//  accY = getAccInG(yaccPin);
+  //accZ = getAccInG(zaccPin);
   
   //flat on the table: accXangle and accYangle are 180 degrees
   //output should be 0 to 360 degrees
   //need to think about what angle should be starting position
-  double accXangle = ((atan2(accX, accZ)+PI)*RAD_TO_DEG);
-  double accYangle = (atan2(accY, accZ)+PI)*RAD_TO_DEG;
+//  double accXangle = ((atan2(accX, accZ)+PI)*RAD_TO_DEG);
+//  double accYangle = (atan2(accY, accZ)+PI)*RAD_TO_DEG;
    
   //=================
   //gyro code
@@ -141,7 +143,7 @@ void loop()
   double gyroXangle = getGyroRate(xgyroPin)*timeDiff;
   if(gyroXangle < .26 && gyroXangle > -.26)
     gyroXangle = 0;
-  double gyroYangle = getGyroRate(ygyroPin)*timeDiff;
+ // double gyroYangle = getGyroRate(ygyroPin)*timeDiff;
 
 /*  
   // Calculate the angle using a Complimentary filter
@@ -156,8 +158,8 @@ if(gyroYangle != 0)
     Serial.print("compAngleY: ");
   Serial.print(compAngleY); Serial.print("\t");
 */
-    Serial.print("gyroXangle: ");
-  Serial.print(gyroXangle); Serial.print("\t");
+//    Serial.print("gyroXangle: ");
+//  Serial.print(gyroXangle); Serial.print("\t");
 //  Serial.print("gyroYangle: ");
 //  Serial.print(gyroYangle);  Serial.print("\t");
 
@@ -167,12 +169,15 @@ if(gyroYangle != 0)
     curX += 360;
     if(curX > 360)
     curX -= 360;
-  curY += gyroYangle;
+  
   
 //  Serial.print("Cur x: ");
-  Serial.print(curX); Serial.print("\t");
-
-  Serial.print("\n");
+//  Serial.print(curX); Serial.print("\t");
+//  Serial.print("\n");
+//   gyro_msg.data = curX;
+   gyro_msg.data = 168;
+   p.publish(&gyro_msg);
+   nh.spinOnce();
 
   lastLoopTime = micros();
 
