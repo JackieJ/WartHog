@@ -31,11 +31,14 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jennifer/fuerte_workspace/sandbox/compass
+CMAKE_SOURCE_DIR = /home/robo/Projects/WartHog/compass_pkg
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jennifer/fuerte_workspace/sandbox/compass/build
+CMAKE_BINARY_DIR = /home/robo/Projects/WartHog/compass_pkg/build
 
 # Utility rule file for test-results.
 
@@ -43,7 +46,7 @@ CMAKE_BINARY_DIR = /home/jennifer/fuerte_workspace/sandbox/compass/build
 include CMakeFiles/test-results.dir/progress.make
 
 CMakeFiles/test-results:
-	/opt/ros/fuerte/share/rosunit/bin/summarize_results.py --nodeps compass
+	/opt/ros/groovy/share/rosunit/scripts/summarize_results.py --nodeps compass_pkg
 
 test-results: CMakeFiles/test-results
 test-results: CMakeFiles/test-results.dir/build.make
@@ -58,6 +61,6 @@ CMakeFiles/test-results.dir/clean:
 .PHONY : CMakeFiles/test-results.dir/clean
 
 CMakeFiles/test-results.dir/depend:
-	cd /home/jennifer/fuerte_workspace/sandbox/compass/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jennifer/fuerte_workspace/sandbox/compass /home/jennifer/fuerte_workspace/sandbox/compass /home/jennifer/fuerte_workspace/sandbox/compass/build /home/jennifer/fuerte_workspace/sandbox/compass/build /home/jennifer/fuerte_workspace/sandbox/compass/build/CMakeFiles/test-results.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/robo/Projects/WartHog/compass_pkg/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robo/Projects/WartHog/compass_pkg /home/robo/Projects/WartHog/compass_pkg /home/robo/Projects/WartHog/compass_pkg/build /home/robo/Projects/WartHog/compass_pkg/build /home/robo/Projects/WartHog/compass_pkg/build/CMakeFiles/test-results.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/test-results.dir/depend
 
