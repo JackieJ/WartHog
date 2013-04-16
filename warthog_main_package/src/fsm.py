@@ -1,5 +1,8 @@
 #!/usr/bin/python
 
+#Author: Jackie Jin
+#License: BSD
+
 import rospy
 from std_msgs.msg import String
 import roslib; roslib.load_manifest('gps_common')
@@ -9,6 +12,7 @@ from turtlesim.msg import *
 import yaml
 import sys
 import time
+import math
 
 class FSM():
     def __init__ (self):
@@ -17,14 +21,38 @@ class FSM():
         self.velocityOutput = Velocity()
         self.linearSpeed = 0
         self.angularSpeed = 0
+        self.currentTwist = {
+            'utm':{
+                'x':.0,
+                'y':.0
+                },
+            'angle':.0
+            }
+        self.targetTwist = {
+            'utm':{
+                'x':.0,
+                'y':.0
+                },
+            'angle':.0
+            }
         #load waypoints from the yaml file
-        try:
-            yamlStream = open("./waypoints.yaml", "r");
-            self.waypoints = yaml.load(yamlStream)
-        except IOError:
-            print >> sys.stderr, "please run collectWaypoints.py before the launching!"
+        self.waypoints = yaml.load(file('/home/robo/Projects/WartHog/warthog_main_package/src/waypoints.yaml','r'))
+       
+    def run(self):
+        pass
+
+    def cvCallback(self, data):
+        pass
+    
+    def headingCallback(self, data):
+        pass
         
+    def killSwitchCallback(self, data):
+        pass
         
+    def bumperCallback(self, data):
+        pass
+
     def vCalc(self):
         pass
         
@@ -43,5 +71,6 @@ class FSM():
 if __name__ == '__main__':
     try:
         fsm = FSM()
+        fsm.run()
     except rospy.ROSInterruptException:
         pass
