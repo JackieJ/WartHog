@@ -4,11 +4,12 @@
 #License: BSD
 
 import rospy
-from std_msgs.msg import String
+from std_msgs.msg import *
 import roslib; roslib.load_manifest('gps_common')
 from gps_common.msg import *
 from sensor_msgs.msg import *
 from turtlesim.msg import *
+from nav_msgs.msg import *
 import yaml
 import sys
 import time
@@ -21,49 +22,89 @@ class FSM():
         self.velocityOutput = Velocity()
         self.linearSpeed = 0
         self.angularSpeed = 0
+        self.MODE = 0 #0 Walk; 1 Detector; 2 Target(bumper); 3 Kill
+        self.isKilled = False
         self.currentTwist = {
             'utm':{
                 'x':.0,
                 'y':.0
                 },
-            'angle':.0
+            'heading':-99
             }
         self.targetTwist = {
             'utm':{
                 'x':.0,
                 'y':.0
                 },
-            'angle':.0
+            'heading':.-99
             }
         #load waypoints from the yaml file
         self.waypoints = yaml.load(file('/home/robo/Projects/WartHog/warthog_main_package/src/waypoints.yaml','r'))
-       
-    def run(self):
-        pass
+        #Constants
+        self.MAXLINEAR = 5
+        self.MAXANGULAR = 5
+        #############for tests#############
+        self.testGain = -1
+        self.velocityOutput.linear = self.MAXLINEAR
+        self.velocityOutput.angular = 0
+        #############for tests##############
 
+    def test(self):
+        self.velocityOutput.linear += self.testGain
+        self.velocityOutput.angular = 0
+        self.motorPublisher.publish(self.velocityOutput);
+        
+    def run(self):
+        while not rospy.is_shutdown():
+            #subscribers
+            self.killSwitchSub = rospy.Subscriber("kill", Bool, self.killSwitchCallback)
+            self.gpsUTMSub = rospu.Subscriber("odom", Odometry, self.GPSUTMCallback);
+            
+    def GPSUTMCallback(self, data):
+        #retrieve gps data first, then grab the gyro data
+        
+        #gyro heading
+        self.gyroSub = rospy.Subscriber("gyro", Float32, self.headingCallback)
+            
     def cvCallback(self, data):
         pass
     
     def headingCallback(self, data):
         pass
         
+    def killSwitchHook(self):
+        #extra guarantee for kill switch shutdown
+        self.velocityOutput.linear = 0
+        self.velocityOutput.angular = 0
+        self.motorPublisher.publish(self.velocityOutput)
+
     def killSwitchCallback(self, data):
-        pass
-        
+        #if kill switch is true shutoff the whole system
+        if data:
+            rospy.on_shutdown(killSwitchHook)
+            self.isKilled = True
+            self.publish()
+            rospy.signal_shutdown("KILL SWITCH TRIGGERED! SYSTEM SHUTDOWN")
+                        
     def bumperCallback(self, data):
-        pass
+        if data:
+            test()
 
     def vCalc(self):
         pass
         
-    def publisher(self):
-        try:
-            self.velocityOutput.linear = self.linearSpeed
-            self.velocityOutput.angular = self.angularSpeed
-        except Exception as err:
-            print >> sys.stderr, "failed to grab linear and angular speed!"
+    def publish(self):
+        if self.isKilled:
             self.velocityOutput.linear = 0
             self.velocityOutput.angular = 0
+        else:
+            try:
+                self.velocityOutput.linear = self.linearSpeed
+                self.velocityOutput.angular = self.angularSpeed
+            except Exception as err:
+                print >> sys.stderr, "failed to grab linear and angular speed!"
+                self.velocityOutput.linear = 0
+                self.velocityOutput.angular = 0
         self.motorPublisher.publish(self.velocityOutput)
         
 

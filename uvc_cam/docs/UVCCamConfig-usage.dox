@@ -1,0 +1,23 @@
+\subsubsection usage Usage
+\verbatim
+<node name="uvc_cam_node" pkg="uvc_cam" type="uvc_cam_node">
+  <param name="camera_name" type="str" value="camera" />
+  <param name="device" type="str" value="/dev/video0" />
+  <param name="format_mode" type="int" value="1" />
+  <param name="width" type="int" value="640" />
+  <param name="height" type="int" value="480" />
+  <param name="frame_id" type="str" value="camera" />
+  <param name="frame_rate" type="double" value="15.0" />
+  <param name="camera_info_url" type="str" value="" />
+  <param name="absolute_exposure" type="int" value="2089" />
+  <param name="exposure" type="int" value="1" />
+  <param name="sharpness" type="int" value="142" />
+  <param name="power_line_frequency" type="int" value="0" />
+  <param name="white_balance_temperature" type="bool" value="True" />
+  <param name="gain" type="int" value="82" />
+  <param name="saturation" type="int" value="50" />
+  <param name="contrast" type="int" value="50" />
+  <param name="brightness" type="int" value="66" />
+</node>
+\endverbatim
+

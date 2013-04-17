@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/robo/Projects/WartHog/coneDetectorCV/build/devel/setup.sh
