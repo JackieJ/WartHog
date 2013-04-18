@@ -1,5 +1,0 @@
-build/
-src/nmea_gps_driver/
-*.pyc
-*.pyo
-*.swp

@@ -1,0 +1,6 @@
+Name: rosserial_msgs
+Description: Description of rosserial_msgs
+Version: 0.4.4
+Cflags: -I/home/robo/Projects/WartHog/catkinworkspace/install/include
+Libs: -L/home/robo/Projects/WartHog/catkinworkspace/install/lib 
+Requires: message_runtime

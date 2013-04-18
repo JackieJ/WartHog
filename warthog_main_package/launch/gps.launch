@@ -1,0 +1,5 @@
+<launch>
+        <node pkg="gpsd_client" type="gpsd_client" name="GPSReceiver"
+        args="_host:=localhost _port:=2947 _use_gps_time:=false"/>
+        <node pkg="gps_common" type="utm_odometry_node" name="LLtoUTM"/>
+</launch>
