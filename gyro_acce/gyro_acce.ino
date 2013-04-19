@@ -7,6 +7,7 @@ ros::NodeHandle nh;
 std_msgs::Float32 gyro_msg;
 ros::Publisher p("gyro", &gyro_msg);
 
+
 #define RAD_TO_DEG  57296 / 1000
 // these constants describe the pins. They won't change:
 const int xaccPin = A0;           // x-axis of the accelerometer
@@ -55,6 +56,7 @@ void setup()
 {
   nh.initNode();
   nh.advertise(p);
+  gyro_msg.data = 0;
   
   // initialize the serial communications:
   Serial.begin(57600);
@@ -174,13 +176,12 @@ if(gyroYangle != 0)
 //  Serial.print("Cur x: ");
 //  Serial.print(curX); Serial.print("\t");
 //  Serial.print("\n");
-//   gyro_msg.data = curX;
-   gyro_msg.data = 168;
+  gyro_msg.data = curX;
    p.publish(&gyro_msg);
-   nh.spinOnce();
 
   lastLoopTime = micros();
 
   // delay before next reading:
   delay(sampleDelay);
+     nh.spinOnce();
 }

@@ -35,11 +35,17 @@ float areaMin = 500.0,
 
 double screenCoverTarget = 0.75;
 
-int main()
+int main(int argc, char** argv)
 {
+  //ros initialization
+  ros::init(argc, argv, "coneDetector");
+  ros::NodeHandle n;
+  ros::Publisher cvPub = n.advertise<std_msgs::String>("cone",1000);
+  ros::Rate loop_rate(2);
+  
   Mat image;
 
-  VideoCapture cap(0); // webcam class
+  VideoCapture cap(1); // webcam class
   //cap.open(0);	  // use webcam 0 <-- change this to work with the robot's webcam number
 
   cap.set(CV_CAP_PROP_FRAME_WIDTH, 480);
@@ -47,7 +53,7 @@ int main()
 
   cap.set(CV_CAP_PROP_CONTRAST, 50); 
 
-  while(true)
+  while(ros::ok())
     {
       for(int n=0;n<2;n++)    // stores the pic from the webcam into image
         {
@@ -131,29 +137,33 @@ int main()
       std::stringstream ss;
         
       if(xCoordinates.empty())			// if there is no orange in the image
-        ss << "no orange detected";
+        ss << "N";
       else
         {
           if(screenCover > screenCoverTarget)		// if the image fills up at least a set percentage of the screen
             {
-              ss << "screen filled";
+              ss << "F";
             }
           else if(xCoordinates.front() < 200)	    // if the image is on the left
             {
-              ss << "left";
+              ss << "L";
             }
           else if(xCoordinates.front() > 280)	    // if the image is on the right
             {
-              ss << "right";
+              ss << "R";
             }
           else								    // if the image is in the middle
             {
-              ss << "center";
+              ss << "M";
             }
             
         }
       msg.data = ss.str();
       ROS_INFO("%s", msg.data.c_str());
+      //publish the message to the 'cone' topic
+      cvPub.publish(msg);
+      ros::spinOnce();
+      loop_rate.sleep();
     }
   return 0;
 }

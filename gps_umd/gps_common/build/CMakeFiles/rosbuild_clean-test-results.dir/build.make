@@ -46,7 +46,7 @@ CMAKE_BINARY_DIR = /home/robo/Projects/WartHog/gps_umd/gps_common/build
 include CMakeFiles/rosbuild_clean-test-results.dir/progress.make
 
 CMakeFiles/rosbuild_clean-test-results:
-	if ! rm -rf /home/robo/Projects/ROSCatkinWorkspace/build/test_results/gps_common; then echo WARNING:\ failed\ to\ remove\ test-results\ directory ; fi
+	if ! rm -rf /home/robo/.ros/test_results/gps_common; then echo WARNING:\ failed\ to\ remove\ test-results\ directory ; fi
 
 rosbuild_clean-test-results: CMakeFiles/rosbuild_clean-test-results
 rosbuild_clean-test-results: CMakeFiles/rosbuild_clean-test-results.dir/build.make
