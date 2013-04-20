@@ -17,7 +17,7 @@ int Blue_min   =  20,
   Red_min    =  150,
   Red_max    =  240;
 
-double Area_min = 400.0,
+double Area_min = 1000.0, // 400.0
   Area_max = 2000000.0;
 
 // parameters
@@ -33,7 +33,7 @@ int BlueMin  = Blue_min,
 float areaMin = 500.0,
   areaMax = 20000000.0;
 
-double screenCoverTarget = 0.75;
+double screenCoverTarget = 0.50;
 
 int main(int argc, char** argv)
 {

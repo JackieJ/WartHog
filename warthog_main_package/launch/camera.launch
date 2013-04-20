@@ -1,0 +1,3 @@
+<launch>
+        <node pkg="coneDetectorCV" type="coneDetector" name="openCVConeDetector"/>        
+</launch>
