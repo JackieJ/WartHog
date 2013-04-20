@@ -22,7 +22,7 @@ class FSM():
         self.velocityOutput = Velocity()
         self.linearSpeed = 0
         self.angularSpeed = 0
-        self.MODE = 0 #0 Walk; 1 Detector; 2 Target(bumper); 3 Kill
+        self.MODE = 0 #0 Walk; 1 Detector; 2 Target(bumper or Camera); 3 Kill
         self.isKilled = False
         self.currentPose = {
             'utm':{
@@ -31,16 +31,12 @@ class FSM():
                 },
             'heading':-99
             }
-        self.targetPose = {
-            'utm':{
-                'x':.0,
-                'y':.0
-                },
-            'heading':-99
-            }
         #load waypoints from the yaml file
         #self.waypoints = yaml.load(file('/home/robo/Projects/WartHog/warthog_main_package/src/waypoints.yaml','r'))
-        #self.waypoints = yaml.load(open('/home/robo/Projects/WartHog/warthog_main_package/src/waypoints.yaml', 'r'))
+        self.waypoints = yaml.load(open('/home/robo/Projects/WartHog/warthog_main_package/src/waypoints.yaml', 'r'))
+        #retrieve target coordinates from the beginning of the list
+        self.targetCoord = waypoints.pop(0)
+        self.targetPose = self.targetCoord
         #Constants
         self.MAXLINEAR = 3
         self.MAXANGULAR = 3
@@ -65,10 +61,20 @@ class FSM():
         #retrieve gps data first, then grab the gyro data
         (self.currentPose['utm'])['x'] = data.pose.pose.position.x
         (self.currentPose['utm'])['y'] = data.pose.pose.position.y
-        print >> sys.stdout, "pose_x:", self.currentPose['utm']['x']
-        print >> sys.stdout, "pose_y:", self.currentPose['utm']['y']        
+        
+        #loggings
+        print >> sys.stdout, "target_x", self.targetPose['x']
+        print >> sys.stdout, "target_y", self.targetPose['y']
+        if self.targetPose['hasCone']:
+            print >> sys.stdout, "target has cone: yes"
+        else:
+            print >> sys.stdout, "target has cone: no"
+        print >> sys.stdout, "target direction", self.targetPose['direction']
+        print >> sys.stdout, "current pose_x:", self.currentPose['utm']['x']
+        print >> sys.stdout, "current pose_y:", self.currentPose['utm']['y']    
+        
         #gyro heading
-        #self.gyroSub = rospy.Subscriber("gyro", Float32, self.headingCallback)
+        self.gyroSub = rospy.Subscriber("gyro", Float32, self.headingCallback)
         
     def cvCallback(self, data):
         if data.data == 'F':#too close
@@ -111,14 +117,14 @@ class FSM():
 
     def killSwitchCallback(self, data):
         #if kill switch is true shutoff the whole system
-        if data:
+        if data.data:
             rospy.on_shutdown(self.killSwitchHook)
             self.isKilled = True
             self.publish()
             rospy.signal_shutdown("KILL SWITCH TRIGGERED! SYSTEM SHUTDOWN")
                         
     def bumperCallback(self, data):
-        if data:
+        if data.data:
             #test
             self.velocityOutput.linear = -self.velocityOutput.linear
             #test

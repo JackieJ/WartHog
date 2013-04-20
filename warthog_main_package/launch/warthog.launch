@@ -6,7 +6,7 @@
         <node pkg="gpsd_client" type="gpsd_client" name="GPSReceiver"
         args="_host:=localhost _port:=2947 _use_gps_time:=false"/>
         <node pkg="gps_common" type="utm_odometry_node" name="LLtoUTM"/>
-        <node pkg="warthog_main_package" type="fsm.py" name="FSM"/>        
+        <node pkg="warthog_main_package" type="fsm.py" output="log|screen" name="FSM"/>        
         <node pkg="rosserial_python" type="serial_node.py" name="BumperKillswitch" 
         args="\/dev\/ttyACM1"/>
         <node pkg="rosserial_python" type="serial_node.py" name="Gyro"

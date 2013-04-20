@@ -18,7 +18,7 @@ class ConeCoordsGetter():
     def __init__ (self):
         rospy.init_node('FSM')
         print >> sys.stdout, "creating the yaml file waypoings.yaml!"
-        self.stream = file('/home/robo/Projects/WartHog/warthog_main_package/src/waypoints.yaml', 'w+')
+        self.stream = file('/home/robo/Projects/WartHog/warthog_main_package/src/waypoints.yaml', 'rw+')
         self.coordData = []
         
     def run(self):
