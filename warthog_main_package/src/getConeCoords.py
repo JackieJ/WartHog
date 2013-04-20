@@ -25,7 +25,7 @@ class ConeCoordsGetter():
         while not rospy.is_shutdown():
             #print >> sys.stdout, "waiting for input..."
             self.gpsUTMSub = rospy.Subscriber("odom", Odometry, self.GPSUTMCallback)
-            time.sleep(2)
+            time.sleep(4)
             
     def GPSUTMCallback(self, data):
         print >> sys.stdout, "pose_x:", data.pose.pose.position.x

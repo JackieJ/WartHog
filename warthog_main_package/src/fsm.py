@@ -40,7 +40,7 @@ class FSM():
             }
         #load waypoints from the yaml file
         #self.waypoints = yaml.load(file('/home/robo/Projects/WartHog/warthog_main_package/src/waypoints.yaml','r'))
-        #self.waypoints = yaml.load(open('/home/robo/Projects/WartHog/warthog_main_package/src/waypoints.yaml', 'r'))
+        self.waypoints = yaml.load(open('/home/robo/Projects/WartHog/warthog_main_package/src/waypoints.yaml', 'r'))
         #Constants
         self.MAXLINEAR = 3
         self.MAXANGULAR = 3
