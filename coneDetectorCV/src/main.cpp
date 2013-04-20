@@ -10,12 +10,12 @@
 using namespace std;
 using namespace cv;
 
-int Blue_min   =  0,
+int Blue_min   =  20,
   Blue_max   =  120,
-  Green_min  =  0,
+  Green_min  =  20,
   Green_max  =  120,
-  Red_min    =  100,
-  Red_max    =  222;
+  Red_min    =  150,
+  Red_max    =  240;
 
 double Area_min = 400.0,
   Area_max = 2000000.0;
@@ -51,7 +51,7 @@ int main(int argc, char** argv)
   cap.set(CV_CAP_PROP_FRAME_WIDTH, 480);
   cap.set(CV_CAP_PROP_FRAME_HEIGHT, 320);
 
-  cap.set(CV_CAP_PROP_CONTRAST, 50); 
+  cap.set(CV_CAP_PROP_CONTRAST,0.1); 
 
   while(ros::ok())
     {
