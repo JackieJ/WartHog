@@ -18,6 +18,7 @@ import math
 class FSM():
     def __init__ (self):
         rospy.init_node('FSM')
+        rospy.loginfo("Initializing ROBOT.....")
         self.motorPublisher = rospy.Publisher('motor_velocity', Velocity)
         self.velocityOutput = Velocity()
         self.linearSpeed = 0
@@ -62,6 +63,7 @@ class FSM():
 
     def run(self):
         while not rospy.is_shutdown():
+            rospy.loginfo("Starting running process!")
             #subscribers
             self.killSwitchSub = rospy.Subscriber("kill", Bool, self.killSwitchCallback)
             self.bumperSub = rospy.Subscriber("bump", Bool, self.bumperCallback)
@@ -70,10 +72,15 @@ class FSM():
             #gyro headings
             #self.gyroSub = rospy.Subscriber("gyro", Float32, self.headingCallback)
             time.sleep(1)
-            
+
+    def logging(msg):
+        rospy.loginfo(msg)
+
     def GPSUTMCallback(self, data):
         #the walking mode has the lowest priority
+        rospy.loginfo("GPS:if walking state....")
         if self.MODE == 0:
+            rospy.loginfo("GPS: retrieving GPS data")
             #retrieve gps data first, then grab the gyro data
             (self.currentPose['utm'])['x'] = data.pose.pose.position.x
             (self.currentPose['utm'])['y'] = data.pose.pose.position.y
@@ -91,9 +98,10 @@ class FSM():
     
             #gyro heading
             self.gyroSub = rospy.Subscriber("gyro", Float32, self.headingCallback)
-            
+        rospy.loginfo("GPS: not in walking state......")
                 
     def cvCallback(self, data):
+        self.logging("got camera data!")
         if data.data == 'F':#too close
             self.MODE = 1
             rospy.loginfo("cv:filled")
@@ -118,7 +126,14 @@ class FSM():
             rospy.loginfo("cv:in the center")
             self.linearSpeed = self.MAXLINEAR * self.cvLinearGain
             self.angularSpeed = 0
+        if data.data == 'N':
+            self.MODE = 1
+            self.logging("CAMERA, looking for cone")
+            self.linearSpeed = 0
+            self.angularSpeed = self.MAXANGULAR * self.cvAngularGain
+            
         rospy.loginfo("publishing cv")
+        self.logging("CAMERA: Publishing....")
         self.publish()
         
     def headingCallback(self, data):
@@ -135,6 +150,7 @@ class FSM():
         # self.motorPublisher.publish(self.velocityOutput)
         
         # retrieve the heading value from gyro and perform calculation
+        self.logging("GYRO: retrieving heading data....")
         self.currentPose['heading'] = data.data
         #calculate the velocity based on target 
         self.vCalc()
@@ -148,7 +164,9 @@ class FSM():
 
     def killSwitchCallback(self, data):
         #if kill switch is true shutoff the whole system
+        
         if data.data:
+            self.logging("KILL: Kill switch triggered, shuting down!")
             rospy.on_shutdown(self.killSwitchHook)
             self.isKilled = True
             self.publish()
@@ -156,12 +174,14 @@ class FSM():
                         
     def bumperCallback(self, data):
         if data.data:
+            self.logging("bumper: bumpered pressed entering mode two")
             self.MODE = 2
             errX = self.targetPose['x'] - self.currentPose['utm']['x']
             errY = self.targetPose['y'] - self.currentPose['utm']['y']
             distancePow = math.pow(errX, 2) + math.pow(errY, 2)
             distanceFromTheTarget = math.sqrt(distancePow)
             if distanceFromTheTarget < 1:
+                self.logging("bumper: within target range, poping out target and enter next target state")
                 self.linearSpeed = 0
                 self.angularSpeed = 0
                 rospy.loginfo("Cone Reached Backing up")
@@ -171,14 +191,17 @@ class FSM():
                 time.sleep(3)
                 #pop out the target and go to next target
                 self.targetPose = self.waypoints.pop(0)
+                self.logging("bumper: back to walk mode")
                 self.MODE = 0
 
     def backup (self, direction):
         #backup left
         if direction == "L":
+            self.logging("backing up left")
             self.linearSpeed = -self.MAXLINEAR * self.backLinearGain
             self.angularSpeed = -self.MAXANGULAR * self.backAngularGain
         elif direction == "R":
+            self.logging("backing up right")
             self.linearSpeed = -self.MAXLINEAR * self.backLinearGain
             self.angularSpeed = self.MAXANGULAR * self.backAngularGain
         if direction != ' ':
@@ -201,9 +224,11 @@ class FSM():
         angleErr = targetAngle - self.currentPose['heading']
         
         if (angleErr >= 90 and angleErr <= 180) or angleErr <= -180:
+            self.logging("vCalc: full turning....")
             self.linearSpeed = 0
             self.angularSpeed = -self.fullTurnAngularGain * self.MAXANGULAR
         elif angleErr > -90 and angleErr < 90:
+            self.logging("vCalc: normal walking.....")
             self.linearSpeed = math.cos(angleErr) * self.MAXLINEAR * self.linearGain
             self.angularSpeed = math.sin(angleErr)* self.MAXANGULAR
             
@@ -212,8 +237,10 @@ class FSM():
         if distanceFromTheTarget < self.targetReachDistanceBound and math.fabs(angleErr) <= self.angleErrBound: 
             #go to detection mode
             if self.targetPose['hasCone']:
+                self.logging("go to the camera mode for detection")
                 self.MODE = 1
             else:
+                self.logging("go to the next target point")
                 #goto next waypoint
                 self.targetPose = self.waypoints.pop(0)
         
@@ -229,6 +256,7 @@ class FSM():
                 print >> sys.stderr, "failed to grab linear and angular speed!"
                 self.velocityOutput.linear = 0
                 self.velocityOutput.angular = 0
+        self.logging("publisher: publishing vel message....")
         self.motorPublisher.publish(self.velocityOutput)
         
 
